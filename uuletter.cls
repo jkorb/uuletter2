@@ -300,6 +300,15 @@
   \else
   \@date
   \fi}
+\newcommand{\@printemail}{%
+  \ifx \@email \empty
+  \else
+  \href{mailto:\@email}{\@email}
+  \fi}
+\newcommand{\@printwebsite}{%  \ifx \@website \empty
+  \else
+  \href{\@website}{\@website}
+  \fi}
 \newcommand{\@printsignature}{%
   \if@signature
   \IfFileExists{signature-uuletter.png}{\includegraphics{signature-uuletter.png}\\}{%
@@ -362,8 +371,8 @@
       \@printdetailline{\@referencelabel}{\@reference}
       \@printdetailline{\@telephonelabel}{\@telephone}
       \@printdetailline{\@faxlabel}{\@fax}
-      \@printdetailline{\@emaillabel}{\href{mailto:\@email}{\@email}}
-      \@printdetailline{\@websitelabel}{\href{\@website}{\@website}}
+      \@printdetailline{\@emaillabel}{\@printemail}
+      \@printdetailline{\@websitelabel}{\@printwebsite}
       \\
       \textbf{\@smaller \@datelabel} & \@printdate\\
       \@printdetailline{\@subjectlabel}{\@subject}
