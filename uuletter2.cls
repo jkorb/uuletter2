@@ -305,7 +305,8 @@
   \else
   \href{mailto:\@email}{\@email}
   \fi}
-\newcommand{\@printwebsite}{%  \ifx \@website \empty
+\newcommand{\@printwebsite}{%
+  \ifx \@website \empty
   \else
   \href{\@website}{\@website}
   \fi}
