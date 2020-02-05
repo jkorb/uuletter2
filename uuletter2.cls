@@ -1,4 +1,4 @@
-%% uuletter.cls
+%% uuletter2.cls
 %% Copyright 2020 J. Korbmacher
 %
 % This work may be distributed and/or modified under the
@@ -13,7 +13,7 @@
 % 
 % The Current Maintainer of this work is J. Korbmacher (j.korbmacher@uu.nl).
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{uuletter}[2020/01/29 v0.2.0]
+\ProvidesClass{uuletter2}[2020/02/05 v0.2.1]
 \newif\if@dutch
 \newif\if@verdana
 \@verdanafalse
