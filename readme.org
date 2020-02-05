@@ -1,4 +1,4 @@
-#+TITLE:        =uuletter.cls= v.0.2.0 Readme
+#+TITLE:        =uuletter2.cls= v.0.2.1 Readme
 #+AUTHOR:      J. Korbmacher
 #+DATE:        <2020-01-29 Wed>
 #+EMAIL:       j.korbmacher@uu.nk
@@ -7,11 +7,11 @@
 * About
 
 The purpose of this work is to provide a \LaTeX document class
-(=uuletter.cls=) for writing letters that comply with the Utrecht
-University (UU) Corporate Idenity.
+(=uuletter2.cls=) for writing letters that comply with the Utrecht
+University (UU) Corporate Idenity.[FN:1]
 
 The class is loaded like any other document class by means of the
-command =\documentclass[<options>]{uuletter}=. For a description of
+command =\documentclass[<options>]{uuletter2}=. For a description of
 the options, see below.
 
 By default (i.e. if you select no options), the letter is set in the
@@ -25,10 +25,13 @@ Catalina with MacTex 2019. I'd very much appreciate bug reports to
 j.korbmacher@uu.nl and will keep this updated. In the next days, I
 also put this on code on github.
 
+[FN:1] There exists a class called =uuletter.cls= at
+https://svn.science.uu.nl/index.php?RID=657 but it appears a bit dated. 
+
 * Installation and Dependencies
 
 The simplest way to use the class is to include the actual style file
-(=uuletter.cls=), the logos (with their original file names,
+(=uuletter2.cls=), the logos (with their original file names,
 #+BEGIN_CENTER
 =UU_logo_EN_CMYK.png= 
 and
@@ -44,20 +47,20 @@ If you like the class and want to make it available for every \LaTeX
 file you compile on your computer, you need to put the files somewhere
 in the TDS (TeX Directory Structure). For Mac, I recommend:
 
-+ Put =uuletter.cls= in
++ Put =uuletter2.cls= in
 #+BEGIN_CENTER
-  =Users/<username>/Library/texmf/tex/latex/uuletter=
+  =Users/<username>/Library/texmf/tex/latex/uuletter2=
 #+END_CENTER 
   If that directory doesn't exist, it's safe to create it.
 + Put the logo files (with their original file names,
   =UU_logo_EN_CMYK.png= and =UU_logo_NL_CMYK.png=) in
 #+BEGIN_CENTER
-  =Users/username/Library/texmf/tex/latex/uuletter/logos/=
+  =Users/username/Library/texmf/tex/latex/uuletter2/logos/=
 #+END_CENTER
  Again, safe to create.
 + Put the signature file named =signature-uuletter.png= in
 #+BEGIN_CENTER
-  =Users/username/Library/texmf/tex/latex/uuletter/signature/=
+  =Users/username/Library/texmf/tex/latex/uuletter2/signature/=
 #+END_CENTER
 Also
   safe to create). A default file with a "John Hancock" is
@@ -136,7 +139,7 @@ finish, use =\closing{<Greeting>}= when you're done. So do something
 like this:
 
 #+BEGIN_EXAMPLE
-\documentclass{uuletter}
+\documentclass{uuletter2}
 \begin{document}
 \opening{Hello there,}
 This is a really short letter.
