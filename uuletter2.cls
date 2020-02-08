@@ -276,14 +276,17 @@
 \email{}
 \website{}
 \visitingaddress{}
-\toname[]{}
-\toaddress{}
-\pobox{}
-\subject{}
-\reference{}
-\yourreference{}
-\enclosure{}
-\date{}
+\newcommand{\@clearcaches}{%
+  \pobox{}
+  \toname[]{}
+  \toaddress{}
+  \subject{}
+  \reference{}
+  \yourreference{}
+  \enclosure{}
+  \date{}
+  \@signaturefalse}
+\@clearcaches
 \newcommand{\@printendline}[1]{%
   \if &#1&
   \else
@@ -330,16 +333,6 @@
     \ClassWarning{uuletter}{Couldn't locate the English logo file. Put
       it somewhere where LaTeX can find it. See readme.}}
   \fi}
-\newcommand{\@clearcaches}{%
-  \pobox{}
-  \toname{}
-  \toaddress{}
-  \subject{}
-  \reference{}
-  \yourreference{}
-  \enclosure{}
-  \date{}
-  \@signaturefalse}
 \newcommand{\@makeheader}{%
   \newpage
   \setcounter{page}{1}
