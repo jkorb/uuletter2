@@ -111,7 +111,6 @@
  \setmainfont{Verdana}
 \else
 \RequirePackage[T1]{fontenc}
- \renewcommand{\normalsize}{\fontsize{9\p@}{11\p@}\selectfont}
  \input{size1\@ptsize.clo}
  \if@roman
   \renewcommand{\familydefault}{\rmdefault}
