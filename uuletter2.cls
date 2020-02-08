@@ -131,9 +131,9 @@
 \fi
 \setlength{\paperwidth}{210mm}
 \setlength{\paperheight}{297mm}
-\setlength{\voffset}{-72\p@}
-\setlength{\textwidth}{482\p@}
-\setlength{\textheight}{638\p@}
+\setlength{\voffset}{-1in}
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{221mm}
 \setlength{\oddsidemargin}{0\p@}
 \setlength{\footskip}{1cm}
 \setcounter{secnumdepth}{0}
@@ -146,7 +146,7 @@
 \@lowpenalty 51
 \@medpenalty 151
 \@highpenalty 301
-\setlength{\headheight}{128\p@}
+\setlength{\headheight}{46mm}
 \setlength{\headsep}{0\p@}
 \setlength\marginparsep {0\p@}
 \setlength\marginparpush{0\p@}
@@ -238,7 +238,7 @@
   \item[]}
   {\endlist}
 \newcounter{letter}
-\def\@oddhead{\hspace*{-72\p@}\@printlogo}
+\def\@oddhead{\hspace*{-1in}\@printlogo}
 \def\@oddfoot{%
   \ifx\@reference\empty
   \else
@@ -344,7 +344,7 @@
   \newpage
   \setcounter{page}{1}
   \stepcounter{letter}
-  \parbox[t][155.34\p@]{297.64\p@}{%I didn't make those up
+  \parbox[t][5.48cm]{10.5cm}{%I didn't make those up
       \strut
       \textbf{\@smaller\@pobox}\\
       
@@ -354,7 +354,7 @@
       \@printendline{\@toinstitute}
       \@toaddress
       \strut}
-  \parbox[t][155.34\p@]{184.25\p@}{%
+  \parbox[t][5.48cm]{6.5cm}{%
       \strut
       \textbf{\@name}\\
       \@subsender\\
@@ -365,9 +365,9 @@
       \@visitingaddress
       \strut}
   \break
-  \parbox[t][151.65\p@]{297.64\p@}{%
+  \parbox[t][5.35cm]{10.5cm}{%
     \strut
-    \begin{tabular}{@{} p{84.189\p@} @{} p{213.45\p@} @{}}
+    \begin{tabular}{@{} p{2.97cm} @{} p{7.53cm} @{}}
       \@printdetailline{\@yourreferencelabel}{\@yourreference}
       \@printdetailline{\@referencelabel}{\@reference}
       \@printdetailline{\@telephonelabel}{\@telephone}
