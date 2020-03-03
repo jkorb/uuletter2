@@ -16,9 +16,8 @@
 \ProvidesClass{uuletter2}[2020/02/05 v0.2.1]
 \newif\if@dutch
 \newif\if@verdana
-\@verdanafalse
-\newif\if@roman
-\@romanfalse
+\newif\if@opensans
+\newif\if@merriweather
 \newif\if@ragged
 \@raggedfalse
 \newif\if@signature
@@ -68,6 +67,9 @@
 \DeclareOption{roman}{\@romantrue}
 \DeclareOption{sans}{}
 \DeclareOption{ragged}{\@raggedtrue}
+\DeclareOption{verdana}{\@verdanatrue}
+\DeclareOption{opensans}{\@opensanstrue}
+\DeclareOption{merriweather}{\@merriweathertrue}
 \DeclareOption{justified}{\@raggedfalse}
 \DeclareOption*{\ClassWarning{uuletter}{Option `\CurrentOption'
     unknown. See readme.md for a list of available options.}}
