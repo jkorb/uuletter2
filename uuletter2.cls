@@ -63,62 +63,35 @@
 \DeclareOption{10pt}{\renewcommand\@ptsize{0}}
 \DeclareOption{11pt}{\renewcommand\@ptsize{1}}
 \DeclareOption{12pt}{\renewcommand\@ptsize{2}}
-\DeclareOption{verdana}{\@verdanatrue}
-\DeclareOption{roman}{\@romantrue}
-\DeclareOption{sans}{}
-\DeclareOption{ragged}{\@raggedtrue}
-\DeclareOption{verdana}{\@verdanatrue}
+\DeclareOption{verdana}{\@Verdanatrue}
 \DeclareOption{opensans}{\@opensanstrue}
 \DeclareOption{merriweather}{\@merriweathertrue}
 \DeclareOption{justified}{\@raggedfalse}
 \DeclareOption*{\ClassWarning{uuletter}{Option `\CurrentOption'
     unknown. See readme.md for a list of available options.}}
-\ExecuteOptions{english,sans,10pt,justified}
+\ExecuteOptions{english,opensans,10pt,justified}
 \ProcessOptions\relax
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[colorlinks=false]{hyperref}
 \RequirePackage{graphicx}
 \if@verdana
- \renewcommand{\normalsize}{\fontsize{9\p@}{11\p@}\selectfont}
- \normalsize
- \newcommand\small{%
-   \@setfontsize\small\@viiipt\@ixpt%
-   \abovedisplayskip 5\p@ \@plus2\p@ \@minus2\p@
-   \abovedisplayshortskip \z@ \@plus1\p@
-   \belowdisplayshortskip 3\p@ \@plus\p@ \@minus2\p@
-   \def\@listi{\leftmargin\leftmargini
-               \topsep 3\p@ \@plus\p@ \@minus\p@
-               \parsep 2\p@ \@plus\p@ \@minus\p@
-               \itemsep \parsep}%
-   \belowdisplayskip \abovedisplayskip}
- \newcommand\footnotesize{%
-   \@setfontsize\footnotesize\@viipt\@viiipt
-   \abovedisplayskip 4\p@ \@plus2\p@ \@minus2\p@
-   \abovedisplayshortskip \z@ \@plus1\p@
-   \belowdisplayshortskip 2.5\p@ \@plus\p@ \@minus\p@
-   \def\@listi{\leftmargin\leftmargini
-               \topsep 3\p@ \@plus\p@ \@minus\p@
-               \parsep 2\p@ \@plus\p@ \@minus\p@
-               \itemsep \parsep}%
-   \belowdisplayskip \abovedisplayskip}
- \newcommand{\@smaller}{\fontsize{7.5\p@}{9\p@}\selectfont}
- \newcommand\scriptsize{\@setfontsize\scriptsize\@vipt\@viipt}
- \newcommand\tiny{\@setfontsize\tiny\@vpt\@vipt}
- \newcommand\large{\@setfontsize\large\@xpt\@xiipt}
- \newcommand\Large{\@setfontsize\Large\@xipt{13}}
- \newcommand\LARGE{\@setfontsize\LARGE\@xiipt{14}}
- \newcommand\huge{\@setfontsize\huge\@xivpt{18}}
- \newcommand\Huge{\@setfontsize\Huge\@xviipt{22}}
- \RequirePackage{fontspec}
- \setmainfont{Verdana}
+  \RequirePackage{mathspec}
+  \setallmainfonts{Verdana}
+  \input{size9.clo}
+  \newcommand{\@smaller}{\fontsize{7.5\p@}{9\p@}\selectfont}
 \else
-\RequirePackage[T1]{fontenc}
- \input{size1\@ptsize.clo}
- \if@roman
-  \renewcommand{\familydefault}{\rmdefault}
- \else
-  \renewcommand{\familydefault}{\sfdefault}
- \fi
+  \RequirePackage[T1]{fontenc}
+  \if@merriweather
+    \RequirePackage{merriweather}
+  \else
+    \if@opensans
+      \RequirePackage[default]{opensans}
+    \else
+      \relax    
+    \fi
+  \fi
+  \RequirePackage{mathastext}
+  \input{size1\@ptsize.clo}
   \newcommand{\@smaller}{\footnotesize}
 \fi
 \if@ragged
