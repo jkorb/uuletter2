@@ -205,12 +205,12 @@
 \AtBeginDocument{%
   \def\today{\number\day-\number\month-\number\year}
   \frenchspacing}
-\newcommand{\name}[2][]{%
+\renewcommand{\name}[2][]{%
   \def \@name {#2}
   \def \@function {#1}}
 \newcommand{\subsender}[1]{\def \@subsender {#1}}
 \newcommand{\visitingaddress}[1]{\def \@visitingaddress {#1}}
-\newcommand{\telephone}[1]{\def \@telephone {#1}}
+\renewcommand{\telephone}[1]{\def \@telephone {#1}}
 \newcommand{\fax}[1]{\def \@fax {#1}}
 \newcommand{\email}[1]{\def \@email {#1}}
 \newcommand{\website}[1]{\def \@website {#1}}
@@ -330,10 +330,10 @@
     \end{tabular}
     \strut}
   \hfill\break}
-\newcommand{\opening}[1]{%
+\renewcommand{\opening}[1]{%
   \@makeheader
   #1\par}
-\newcommand{\closing}[2][\@name]{%
+\renewcommand{\closing}[2][\@name]{%
   \stopbreaks
   \par
   \vspace{\baselineskip}
