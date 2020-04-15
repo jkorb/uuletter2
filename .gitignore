@@ -1,6 +1,10 @@
 #macOS file
 .DS_Store
 
+# Auto folders
+
+**/auto/
+
 #Pictures
 
 *.png

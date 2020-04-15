@@ -1,4 +1,4 @@
-%% uuletter2.cls
+%% `uuletter2.cls'
 %% Copyright 2020 J. Korbmacher
 %
 % This work may be distributed and/or modified under the
@@ -10,19 +10,27 @@
 % version 2005/12/01 or later.
 %
 % This work has the LPPL maintenance status `maintained'.
-% 
-% The Current Maintainer of this work is J. Korbmacher (j.korbmacher@uu.nl).
+%
+% The Current Maintainer of this work is J. Korbmacher (j.korbmacher@uu.nl)
+%
+% DISCLAIMER
+%
+% The UU-house style is protected by copyright, with Utrecht %
+% University having the right of use. This is why the house style
+% cannot be used and/or applied by third parties without permission
+% granted in advance.
+%
+%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{uuletter2}[2020/02/05 v0.2.1]
+\ProvidesClass{uuletter2}%[2020/02/05 v0.2.1]
 \newif\if@dutch
 \newif\if@verdana
 \newif\if@opensans
 \newif\if@merriweather
 \newif\if@ragged
-\@raggedfalse
 \newif\if@signature
+\@raggedfalse
 \@signaturefalse
-\newcommand{\@ptsize}{}
 \newcommand{\@referencelabel}{}
 \newcommand{\@yourreferencelabel}{}
 \newcommand{\@telephonelabel}{}
@@ -60,184 +68,131 @@
   \renewcommand{\@enclosurelabel}{Bijlage}
   \renewcommand{\@rightfooterlabel}[2]{Pagina {#1} van {#2}}
   \renewcommand{\@visitingaddresslabel}{Bezoekadress}}
-\DeclareOption{10pt}{\renewcommand\@ptsize{0}}
-\DeclareOption{11pt}{\renewcommand\@ptsize{1}}
-\DeclareOption{12pt}{\renewcommand\@ptsize{2}}
-\DeclareOption{verdana}{\@verdanatrue}
-\DeclareOption{roman}{\@romantrue}
-\DeclareOption{sans}{}
-\DeclareOption{ragged}{\@raggedtrue}
+%% Pass usual letter options to the letter class
+\DeclareOption{a4paper}{\PassOptionsToClass{\CurrentOption}{letter}}
+% \DeclareOption{a5paper}{\PassOptionsToClass{\CurrentOption}{letter}}
+% \DeclareOption{b5paper}{\PassOptionsToClass{\CurrentOption}{letter}}
+% \DeclareOption{letterpaper}{\PassOptionsToClass{\CurrentOption}{letter}}
+% \DeclareOption{legalpaper}{\PassOptionsToClass{\CurrentOption}{letter}}
+% \DeclareOption{executivepaper}{\PassOptionsToClass{\CurrentOption}{letter}}
+% \DeclareOption{landscape}{\PassOptionsToClass{\CurrentOption}{letter}}
+\DeclareOption{10pt}{\PassOptionsToClass{\CurrentOption}{letter}}
+\DeclareOption{11pt}{\PassOptionsToClass{\CurrentOption}{letter}}
+\DeclareOption{12pt}{\PassOptionsToClass{\CurrentOption}{letter}}
+% \DeclareOption{twoside}{\PassOptionsToClass{\CurrentOption}{letter}}
+% \DeclareOption{oneside{\PassOptionsToClass{\CurrentOption}{letter}}
+\DeclareOption{draft}{\PassOptionsToClass{\CurrentOption}{letter}}
+\DeclareOption{final}{\PassOptionsToClass{\CurrentOption}{letter}}
+\DeclareOption{leqno}{\PassOptionsToClass{\CurrentOption}{letter}}
+\DeclareOption{fleqn}{\PassOptionsToClass{\CurrentOption}{letter}}
+%% Typeface options
 \DeclareOption{verdana}{\@verdanatrue}
 \DeclareOption{opensans}{\@opensanstrue}
 \DeclareOption{merriweather}{\@merriweathertrue}
+%% In case somebody really wants to have word-like typesetting.
 \DeclareOption{justified}{\@raggedfalse}
-\DeclareOption*{\ClassWarning{uuletter}{Option `\CurrentOption'
-    unknown. See readme.md for a list of available options.}}
-\ExecuteOptions{english,sans,10pt,justified}
+\DeclareOption*{\ClassWarning{uuletter2}{The selected option \CurrentOption~is
+    not supported by uuletter.}}
+\ExecuteOptions{english,opensans,a4paper}
 \ProcessOptions\relax
-\RequirePackage[utf8]{inputenc}
-\RequirePackage[colorlinks=false]{hyperref}
+%% Some useful functions
+\def\dividelength#1#2{%
+  \divide #1 #2\relax}
+\def\multiplylength#1#2{%
+  \multiply #1 #2\relax}
+%% Let's begin
+%%
+%% If it wasn't obvious, we build on the letter class:
+\LoadClass{letter}
+%% We beed graphicx to print the logo
 \RequirePackage{graphicx}
+%% Typeface selection routine
 \if@verdana
- \renewcommand{\normalsize}{\fontsize{9\p@}{11\p@}\selectfont}
- \normalsize
- \newcommand\small{%
-   \@setfontsize\small\@viiipt\@ixpt%
-   \abovedisplayskip 5\p@ \@plus2\p@ \@minus2\p@
-   \abovedisplayshortskip \z@ \@plus1\p@
-   \belowdisplayshortskip 3\p@ \@plus\p@ \@minus2\p@
-   \def\@listi{\leftmargin\leftmargini
-               \topsep 3\p@ \@plus\p@ \@minus\p@
-               \parsep 2\p@ \@plus\p@ \@minus\p@
-               \itemsep \parsep}%
-   \belowdisplayskip \abovedisplayskip}
- \newcommand\footnotesize{%
-   \@setfontsize\footnotesize\@viipt\@viiipt
-   \abovedisplayskip 4\p@ \@plus2\p@ \@minus2\p@
-   \abovedisplayshortskip \z@ \@plus1\p@
-   \belowdisplayshortskip 2.5\p@ \@plus\p@ \@minus\p@
-   \def\@listi{\leftmargin\leftmargini
-               \topsep 3\p@ \@plus\p@ \@minus\p@
-               \parsep 2\p@ \@plus\p@ \@minus\p@
-               \itemsep \parsep}%
-   \belowdisplayskip \abovedisplayskip}
- \newcommand{\@smaller}{\fontsize{7.5\p@}{9\p@}\selectfont}
- \newcommand\scriptsize{\@setfontsize\scriptsize\@vipt\@viipt}
- \newcommand\tiny{\@setfontsize\tiny\@vpt\@vipt}
- \newcommand\large{\@setfontsize\large\@xpt\@xiipt}
- \newcommand\Large{\@setfontsize\Large\@xipt{13}}
- \newcommand\LARGE{\@setfontsize\LARGE\@xiipt{14}}
- \newcommand\huge{\@setfontsize\huge\@xivpt{18}}
- \newcommand\Huge{\@setfontsize\Huge\@xviipt{22}}
- \RequirePackage{fontspec}
- \setmainfont{Verdana}
+  \RequirePackage{mathspec}
+  \setallmainfonts{Verdana}
+  \input{size9.clo}
+  \newcommand{\@smaller}{\fontsize{7.5\p@}{9\p@}\selectfont}
 \else
-\RequirePackage[T1]{fontenc}
- \input{size1\@ptsize.clo}
- \if@roman
-  \renewcommand{\familydefault}{\rmdefault}
- \else
-  \renewcommand{\familydefault}{\sfdefault}
- \fi
+  \RequirePackage[T1]{fontenc}
+  \if@merriweather
+    \RequirePackage{merriweather}
+  \else
+    \if@opensans
+      \RequirePackage[default]{opensans}
+    \else
+      \relax % This should obviously never happen
+    \fi
+  \fi
+  \RequirePackage{mathastext}
   \newcommand{\@smaller}{\footnotesize}
 \fi
-\if@ragged
-\raggedright
-\setlength{\rightskip}{0pt minus 4em}
-\fi
+%% Language selection routine
 \if@dutch
   \RequirePackage[dutch]{babel}
 \else
   \RequirePackage[english]{babel}
 \fi
-\setlength{\paperwidth}{210mm}
-\setlength{\paperheight}{297mm}
-\setlength{\voffset}{-1in}
-\setlength{\textwidth}{170mm}
-\setlength{\textheight}{221mm}
-\setlength{\oddsidemargin}{0\p@}
-\setlength{\footskip}{1cm}
-\setcounter{secnumdepth}{0}
+%% If you want ragged, you can have it.
+\if@ragged
+  \raggedright
+  \setlength{\rightskip}{0pt minus 4em}
+\fi
+%% Currently, the package makes urls clickable by default
+\RequirePackage[colorlinks=false]{hyperref}
+%% Redo Layout. Ignore compatability and two-columdn.
+\newlength {\@leading}
+\setlength {\@leading}    {\baselineskip} %just renames baselineskip
+\newlength {\@logowidth}
+\setlength {\@logowidth}  {11.41cm}
+\newlength {\@logoheight}
+\setlength {\@logoheight} {4.5cm}
+% Header
+\setlength   {\voffset}    {-1in}
+\addtolength {\voffset}    {1cm}
+\setlength   {\topmargin}  {\z@}
+\setlength   {\headheight} {\@logoheight}
+\addtolength {\headheight} {-.5in}
+\setlength   {\headsep}    {1em}
+%%% Margins and textwidth
+\setlength   {\hoffset}        {-0.5in}
+\setlength   {\oddsidemargin}  {0.5in}
+\setlength   {\evensidemargin} {0.5in}
+\setlength   {\marginparwidth} {1in}
+\addtolength {\marginparwidth} {-2em}
+\setlength   {\marginparsep}   {1em}
+\setlength   {\marginparpush}  {0.5em}
+\setlength   {\textwidth}      {\paperwidth}
+\addtolength {\textwidth}      {-2in}
+%%% Text height/footer. I want the printed text height to be a
+%%% multiple of baselineskip. Here's my solution.
+\setlength   {\textheight}{\paperheight}
+\addtolength {\textheight}{-1in}
+\addtolength {\textheight}{-\voffset}
+\addtolength {\textheight}{-\topmargin}
+\addtolength {\textheight}{-\headheight}
+\addtolength {\textheight}{-\headsep}
+\addtolength {\textheight}{-.75in}%Footer height
+% We temporarily save the result for error correction
+\setlength   {\@tempdima} {\textheight}
+% The following sets the text height as an even multiple of the
+% leading
+\dividelength   {\textheight} {\baselineskip}
+\multiplylength {\textheight} {\baselineskip}
+% We now correct for the error
+\addtolength {\@tempdima} {-\textheight}
+\setlength   {\footskip}  {.5in}
+\addtolength {\footskip}  {\@tempdima}
+%%% Spacing
+\setlength{\lineskip}{1\p@}
+\setlength{\normallineskip}{1\p@}
+%%% This is a manual parskip package. Maybe it's better to use the
+%%% real thing?.
+\setlength{\parskip}{\@leading}
+\setlength{\parindent}{\z@}
+\renewcommand{\baselinestretch}{}
+%%% Counters
 \pagenumbering{arabic}
-\setlength\lineskip{1\p@}
-\setlength\normallineskip{1\p@}
-\renewcommand\baselinestretch{}
-\setlength{\parskip}{\baselineskip}
-\setlength{\parindent}{0\p@}
-\@lowpenalty 51
-\@medpenalty 151
-\@highpenalty 301
-\setlength{\headheight}{46mm}
-\setlength{\headsep}{0\p@}
-\setlength\marginparsep {0\p@}
-\setlength\marginparpush{0\p@}
-\setlength{\topmargin}{0\p@}
-\newcommand*{\startbreaks}{%
-  \let\\\@normalcr
-  \interlinepenalty 200%
-  \def\par{\@@par\penalty 200\relax}}
-\DeclareRobustCommand\@nobreakvspace
-{\@ifstar\@nobreakvspacex\@nobreakvspacex}
-\def\@nobreakvspacex#1{%
-  \ifvmode
-  \nobreak\vskip #1\relax
-  \else
-    \@bsphack\vadjust{\nobreak\vskip #1}\@esphack
-    \fi}
-\def\@nobreakcr{\@ifstar{\@normalcr*}{\@normalcr*}}
-\newcommand*{\stopbreaks}{%
-  \interlinepenalty\@M
-  \def\par{\@@par\nobreak}%
-  \let\\\@nobreakcr
-  \let\vspace\@nobreakvspace}
-\setlength\leftmargini {2.5em}
-\setlength\leftmarginii {2.2em}
-\setlength\leftmarginiii {1.87em}
-\setlength\leftmarginiv {1.7em}
-\setlength\leftmarginv {1em}
-\setlength\leftmarginvi {1em}
-\setlength\leftmargin {\leftmargini}
-\setlength \labelsep {5\p@}
-\setlength \labelwidth{\leftmargini}
-\addtolength\labelwidth{-\labelsep}
-\setlength\partopsep{0\p@}
-\@beginparpenalty -\@lowpenalty
-\@endparpenalty -\@lowpenalty
-\@itempenalty -\@lowpenalty
-\def\@listI{\setlength\leftmargin{\leftmargini}%
-\setlength\parsep {0\p@}%
-\setlength\topsep {.4em}%
-\setlength\itemsep{.4em}}
-\let\@listi\@listI
-\@listi
-\def\@listii {\setlength  \leftmargin{\leftmarginii}%
-              \setlength  \labelwidth{\leftmarginii}%
-              \addtolength\labelwidth{-\labelsep}}
-\def\@listiii{\setlength \leftmargin{\leftmarginiii}%
-              \setlength \labelwidth{\leftmarginiii}%
-              \addtolength\labelwidth{-\labelsep}%
-              \setlength \topsep {.2em}%
-              \setlength \itemsep {\topsep}}
-\def\@listiv {\setlength  \leftmargin{\leftmarginiv}%
-              \setlength  \labelwidth{\leftmarginiv}%
-              \addtolength\labelwidth{-\labelsep}}
-\def\@listv  {\setlength \leftmargin{\leftmarginv}%
-              \setlength \labelwidth{\leftmarginv}%
-              \addtolength\labelwidth{-\labelsep}}
-\def\@listvi {\setlength \leftmargin{\leftmarginvi}%
-              \setlength \labelwidth{\leftmarginvi}%
-              \addtolength\labelwidth{-\labelsep}}
-\renewcommand\theenumi{\@arabic\c@enumi}
-\renewcommand\theenumii{\@alph\c@enumii}
-\renewcommand\theenumiii{\@roman\c@enumiii}
-\renewcommand\theenumiv{\@Alph\c@enumiv}     
-\newcommand\labelenumi{\theenumi.}
-\newcommand\labelenumii{(\theenumii)}
-\newcommand\labelenumiii{\theenumiii.}
-\newcommand\labelenumiv{\theenumiv.}
-\renewcommand\p@enumii{\theenumi}
-\renewcommand\p@enumiii{\theenumi(\theenumii)}
-\renewcommand\p@enumiv{\p@enumiii\theenumiii}
-\newcommand\labelitemi{\textbullet}
-\newcommand\labelitemii{\normalfont\bfseries \textendash}
-\newcommand\labelitemiii{\textasteriskcentered}
-\newcommand\labelitemiv{\textperiodcentered}
-\newenvironment{description}
-{\list{}{\labelwidth\z@ \itemindent-\leftmargin
-                        \let\makelabel\descriptionlabel}}
-                    {\endlist}
-\newcommand*{\descriptionlabel}[1]{\hspace\labelsep
-  \normalfont\bfseries #1}
-\newenvironment{quotation}{%
-  \list{}{\setlength\listparindent{1.5em}%
-  \setlength\itemindent{\listparindent}%
-  \setlength\rightmargin{\leftmargin}}%
-  \item[]}{%
-  \endlist}
-\newenvironment{quote}{%
-  \list{}{\setlength\rightmargin{\leftmargin}}%
-  \item[]}
-  {\endlist}
+%% Core functionality
 \newcounter{letter}
 \def\@oddhead{\hspace*{-1in}\@printlogo}
 \def\@oddfoot{%
@@ -341,7 +296,7 @@
   \parbox[t][5.48cm]{10.5cm}{%I didn't make those up
       \strut
       \textbf{\@smaller\@pobox}\\
-      
+
       \vspace{\baselineskip}
 
       \@printendline{\@toname}
@@ -354,7 +309,7 @@
       \@subsender\\
 
       \vspace{\baselineskip}
-      
+
       \textbf{\@smaller \@visitingaddresslabel}\\
       \@visitingaddress
       \strut}
@@ -391,3 +346,5 @@
   \startbreaks
   \clearpage
   \@clearcaches}
+%%
+%% EOF: 'uuletter2.cls'

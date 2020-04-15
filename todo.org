@@ -1,0 +1,14 @@
+* Todos
+
+** DONE Project tree
+CLOSED: [2020-04-15 Wed 16:54]
+
+** DONE Options
+CLOSED: [2020-04-15 Wed 22:23]
+
+** DONE Font-Selection
+CLOSED: [2020-04-15 Wed 22:23]
+
+** TODO Page Layout
+
+** TODO Header tables, check measures
