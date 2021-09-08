@@ -1,0 +1,261 @@
+#+TITLE:        =uuletter2.cls= v.0.2.1 Readme
+#+AUTHOR:      J. Korbmacher
+#+DATE:        <2020-01-29 Wed>
+#+EMAIL:       j.korbmacher@uu.nk
+#+LANGUAGE:    en
+
+* About
+
+The purpose of this work is to provide a \LaTeX document class
+(=uuletter2.cls=) for writing letters that comply with the Utrecht
+University (UU) Corporate Idenity.[FN:1]
+
+The class is loaded like any other document class by means of the
+command =\documentclass[<options>]{uuletter2}=. For a description of
+the options, see below.
+
+By default (i.e. if you select no options), the letter is set in the
+standard sans serif font, at 10 pt font size with the usual \LaTeX
+justification, on a4 paper, and with an English language header. There
+is an option (=dutch=), which typesets the header in Dutch.
+
+Note that this is a beta-version. I haven't tested the class much
+beyond the templates and only on my personal Macbook Pro running
+Catalina with MacTex 2019. I'd very much appreciate bug reports to
+j.korbmacher@uu.nl and will keep this updated. In the next days, I
+also put this on code on github.
+
+[FN:1] There exists a class called =uuletter.cls= at
+https://svn.science.uu.nl/index.php?RID=657 but it appears a bit dated. 
+
+* Installation and Dependencies
+
+The simplest way to use the class is to include the actual style file
+(=uuletter2.cls=), the logos (with their original file names,
+#+BEGIN_CENTER
+=UU_logo_EN_CMYK.png= 
+and
+ =UU_logo_NL_CMYK.png=,
+#+END_CENTER
+available under
+https://www.uu.nl/en/organisation/corporate-identity/downloads/logo,
+heading "LOGOS FOR DIGITAL APPLICATIONS"), and the signature file
+(which must be named =signature-uuletter.png=, default "John Hancock" provided)
+in whatever directory you want to compile your letter.
+
+If you like the class and want to make it available for every \LaTeX
+file you compile on your computer, you need to put the files somewhere
+in the TDS (TeX Directory Structure). For Mac, I recommend:
+
++ Put =uuletter2.cls= in
+#+BEGIN_CENTER
+  =Users/<username>/Library/texmf/tex/latex/uuletter2=
+#+END_CENTER 
+  If that directory doesn't exist, it's safe to create it.
++ Put the logo files (with their original file names,
+  =UU_logo_EN_CMYK.png= and =UU_logo_NL_CMYK.png=) in
+#+BEGIN_CENTER
+  =Users/username/Library/texmf/tex/latex/uuletter2/logos/=
+#+END_CENTER
+ Again, safe to create.
++ Put the signature file named =signature-uuletter.png= in
+#+BEGIN_CENTER
+  =Users/username/Library/texmf/tex/latex/uuletter2/signature/=
+#+END_CENTER
+Also
+  safe to create). A default file with a "John Hancock" is
+  included. If you want to use your own scanned signature, you can use
+  any .png file that you rename =signature-uuletter.png=. For a good
+  result, I'd recommend not exceeding 4-5 cm of picture width.
+
+Note that =Users/<username>/Library/= is by default a hidden folder in
+MacOS. You can use Command+Shift+Dot in the folder =Users/<username>/=
+to make it visible. Otherwise, use the internet to figure it out.
+
+For other Unix systems (e.g. Linux) or Windows you're on your own (for
+now). 
+
+The class loads the following packages:
++ =inputenc= with the =utf8= option (this might be a bad idea, let me
+  know if that messes things up).
++ =babel= with the provided langauge option (see below, default: english)
++ =graphicx= with no options (to include the logo and signature)
++ =hyperref= with =colorlinks=false= to have clickable links for the
+  homepage and email in the header (I might also kick that one out).
+
+This means that you don't need to load these packages anymore, unless
+you want to change their options. You're free to load other packages,
+but I haven't explored any possible compatability issues. Since the
+class was written from scratch I /hope/ there are none, but that might
+be folly.
+
+* Package options
+
+The package has the following options:
++ =dutch=
+Typesets a letter according to the Dutch template. With this option,
+the package loads =babel= with the =dutch= option, displays the Dutch
+language UU logo, and the labels in the header are printed in Dutch.
++ =english= (Default)
+Typesets a letter according to the English template. With this option,
+the package loads =babel= with the =english= option (/not/ =british=),
+displays the English language UU logo, and the labels in the header
+are printed in English.
++ =sans= (Default)
+Typesets the letter in the (default) sans-serif font family. Also
+loads =fontenc= with the =T1= option.
++ =roman= 
+Typesets the letter in the (default) roman font family.  Also loads
+=fontenc= with the =T1= option.
++ =verdana=
+Typesets the letter in 9 pt Verdana (if the font is found on the local
+machine). With this option, the letter corresponds to the Brand Policy
+of the University.  *Warning:* This option is implemented via the
+=fontspec= package, which requires compilation with XeLaTex (which is
+relatively easy in, say, TeX Shop).
++ =ragged= 
+Typesets the letter with right-ragged justification. This makes the
+result look like the Word templates, but is not recommended for
+serious letters.
++ =justified= (Default)
+Typsets the letter with standard, \LaTeX justification. Much
+preferrable.
++ =10pt= (Default), =11pt=, =12pt=
+Changes font size as usual in \LaTeX. These options only work in
+combination with the (default) =sans= option and the =roman=
+option. They do /not/ work with the =verdana= option, the reasoning
+being that the university wants Verdana to be typeset in 9 pt and only
+Verdana is actually properly readable at such a small size.
+
+Note that these are /all/ the class options. Some optionns you might
+be used to, like, say, =a5paper=, are not available. I'll consider
+including other options upon request.
+
+* Commands
+
+To begin simply put =\opening{<Salutation>}=
+somewhere after =\begin{document}= and start writing your letter. To
+finish, use =\closing{<Greeting>}= when you're done. So do something
+like this:
+
+#+BEGIN_EXAMPLE
+\documentclass{uuletter2}
+\begin{document}
+\opening{Hello there,}
+This is a really short letter.
+\closing{Bye bye,}
+\end{document} 
+#+END_EXAMPLE
+
+For a more elaborate examples, see the provided templates.
+
+Note that =\closing{<Greeting>}= accepts an optional argument, as in
+#+BEGIN_CENTER
+=\closing[<Sign as>]{<Greeting>}=
+#+END_CENTER
+which tells \LaTeX how you'd like
+to sign your letter. By default, the class uses the sender name
+provided via the =\name{<Name>}= macro (see below), but there are
+conveivable situations where you might want to toy around with this:
+e.g. the sender is the Department but you want to sign with your name,
+the letter head should include your full name and title (prof. dr. dr. so
+and so, provided via =\name{prof. dr. dr. so and so}=) but you want to
+sign with your first name, etc.
+
+You can invoke these commands multiple times in a single .tex file to
+create multiple letters in the same pdf. Note that
+=\opening{<Salutation>}= creates the letter head and
+=\closing{<Greeting>}= the signature. Please use both in every letter
+you want to create. If you want, you can leave their arguments
+empty. Note that if you don't include the =\closing= command, the page
+numbers will not be typset properly. 
+
+You provide the information \LaTeX needs to compose the letter (your
+names, addresses, etc.) via the macros explained in the following
+section. These macros fall into two categories: global and
+local. This distinction only really matters if you want to write more
+than one letter in the same .tex file (if that's not your thing, just
+ignore the labels and use the commands as described/desired). The main
+difference between the two is that local macros are reset after each
+=\closing=, meaning that if you want to write a new letter, you need
+to provide these macros again. This is to avoid accidentally including
+the wrong information. Global macros are /not/ reset, but /can/ be
+manually re-defined.
+
+** Global Commands
+
++ =\name[<Function>]{<Your Name>}=
+This command tells the class which name to use as the sender and,
+optionally, your function. Say, =\name[Head of HR]{dr. Lüdenscheidt}=. Since this is the sender's name in the
+letter head, you should provide full academic titles as you'd like to
+see them in the letter. You can use a more informal address as the
+optional argument for =\closing=.
++ =\subsender{<Subsender>}=
+Best used to name the Department, Institute, etc. where you work. You
+can also use this to make clear that this letter comes from the head
+of department, say.
++ =\visitingaddress{<Address>}=
+Provides your visiting address. You can use =\\= to insert newlines in
+the argument.
++ =\telephone{<phone number>}=
+Provides your phone number.
++ =\fax{<fax number>}=
+Provides your fax number (if that's your thing).
++ =\email{<email>}=
+Provides your email address. This is typeset as a clickable =mailto:=
+link.
++ =\website{<website>}=
+Provides your website (university or otherwise) as a clickable link.
+
+Of these global commands, only phone, fax, email, and website should
+really be left out and only in case you don't want to provide them. If
+an argument is empty or not used, the corresponding line (and label)
+are not printed. But watch out for stray spaces. E.g. =\fax{ }= will
+include the fax label with no fax number following it (a simple space
+actually), while =\fax{}= doesn't print the label. This is a small bug
+(or rather possibly unexpected behavior), which I might fix in the
+future. 
+
+** Local Commands
+
+Note that these are all reset by =\closing=!
+
++ =\toname{<name>}=
+	Defines the recipients name. Used for generating the address
+  field. If there should be no address field, the name can be put in
+  the opening (see below). Not printed if not defined.
++ =\toaddress{<street + no//zipcode + city//country>}=
+  Defines the address of the recipient. Is used together with
+  =\recipientname{}= for generating the address field. Not printed if
+  not defined.
++ =\pobox{<PO Box 99999>}=
+  Defines the PO Box (as per the university template).
++ =\subject{<Letter of Reference for Student>}=
+Defines the subject of the letter. Goes into the letter
+  details if defined, otherwise not printed.
++ =\reference{<FMTUIT/2011/WK/IDEB>}=
+	Defines the sender's reference for the letter. Goes into the
+  letter details if defined, otherwise not printed.
++ =\yourreference{<2012/103/MV/ws>}=
+	Defines the recipient's reference for the letter. Goes into
+  the letter details if defined, otherwise not printed.
++ =\enclosure{<This important document, that important document>}=
+Defines the enclosures of the letter. Goes into the letter
+  details if defined, otherwise not printed.
++ =\date{<dd-mm-yyyy>}=
+  Defines the date of the letter. If undefined or empty, \today is
+  printed in UU's preferred <dd-mm-yyyy> style..
++ =\withsignature=
+Binary option, prints a digital signature (image) from the path
+provide by =\signaturepath{}= (global command). As a local command,
+=\withsignature= is reset at the end of each letter.
+
+** Available environments
+
+Many but not all usual \LaTeX environments are available. At the
+moment the following are available: =enumerate=, =itemize=,
+=description=, =quote=, and =quotation=. Note that
+=\footnote{<footnote>}= is currently /not/ available. I'm not sure if
+it's needed. If you think it is, let me know and I'll include it in
+the next version. Same goes for other commands, environments that I
+haven't thought of. Let me know.

@@ -1,0 +1,36 @@
+\documentclass{uuletter2}
+%\documentclass[verdana,ragged]{uuletter2}%Uncommenting requires XeLaTeX.
+
+%Global macros
+\name[Function]{Sender}
+\subsender{subsender}
+\visitingaddress{Street + number\\Postal code City}
+\telephone{+31 (0)30 253 00 01}
+\fax{+31 (0)30 253 00 02}
+\email{hr.fsw@uu.nl}
+\website{www.uu.nl}
+
+%Local macros
+\pobox{PO Box}
+\toname[Department]{Name addressee}
+\toaddress{Street + number\\Postal code City}
+\yourreference{2012/103/MV/ws}
+\reference{FMTUIT/2011/WK/IDEB}
+\subject{Subject}
+\enclosure{Enclosure}
+\date{}
+
+\usepackage{lipsum}%Used to generate the text test in the
+% template. Safe to remove.
+
+\withsignature %Uncomment to include signature
+
+\begin{document}
+
+\opening{Dear Madam/Sir,}
+
+\lipsum
+
+\closing[prof. dr. A.B.C. Zonnebloem]{Yours sincerely,}
+
+\end{document}
